@@ -1,0 +1,13 @@
+---
+applications:
+- name: hello-worker
+  memory: 128M
+  health-check-type: process
+  services:
+  - hello_rabbitmq_instance
+
+- name: hello-caller
+  memory: 128M
+  command: NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program python call.py
+  services:
+  - hello_rabbitmq_instance
